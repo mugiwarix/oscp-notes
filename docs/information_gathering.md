@@ -94,6 +94,7 @@ nmap --script-help=all # list all scripts
 # -iL input file containing list of targets (IP, domains, ...)
 # -sV service scanning
 # -sC launch default scripts
+# --open shows only open ports in the output
 ```
 
 - Test-NetConnection # PowerShell function to test network connection
@@ -125,9 +126,20 @@ net view \\SMB_HOST /all
 - enum4linux # enumerate Windows and SMB information
 
 ```
-
+# scripting enum4linux for a list of target hosts
+while read ip; do
+enum4linux "$ip" > enum_results
+done < targets_smb
 ```
 
-```
+- [SMTP](/docs/SMTP.md)
+- [SNMP](/docs/SNMP.md)
+
+- gobuster # enumerate network resources against wordlists
 
 ```
+gobuster dns -d DOMAIN -w WORDLIST -t TIMEOUT #dns enumeration
+gobuster dir -u http://IP_ADDR:PORT -w /usr/share/wordlists/dirb/big.txt -t 5 -p PATTERN_FILE
+```
+
+- Nessus
